@@ -25,7 +25,7 @@ function Headline() {
 
   return (
     <div>
-        <h2 className="text-lg pt-4 font-semibold text-left hidden md:block">Headline</h2>
+        <h2 className="text-lg pt-4 font-semibold text-left hidden md:block">News</h2>
       {isDesktop ? (
         // Tampilan Desktop (Grid, Hanya 3 Berita)
         <div className="blog-container grid grid-cols-2 pb-4 py-5 md:grid-cols-3 gap-3 px-1">
