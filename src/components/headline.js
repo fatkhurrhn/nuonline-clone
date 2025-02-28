@@ -61,7 +61,7 @@ function Headline() {
       ) : (
         // Tampilan Mobile (List Seperti Awal)
         <div className="p-4 mt-6 rounded-lg shadow-lg w-[390px]">
-          <h2 className="text-lg font-semibold text-left">Headline</h2>
+          <h2 className="text-lg font-semibold text-left">News</h2>
           <hr className="my-3 border-zinc-700" />
           {news.slice(0, 7).map((item, index) => (
             <div key={index}>
