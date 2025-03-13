@@ -27,6 +27,15 @@ export default function JadwalSholat() {
   const [countdown, setCountdown] = useState("");
   const [nextPrayerDate, setNextPrayerDate] = useState(null);
 
+  const [showPopupEks, setShowPopupEks] = useState(false);
+
+  useEffect(() => {
+    const isDesktop = window.innerWidth > 768; // Deteksi desktop
+    if (isDesktop) {
+      setShowPopupEks(true);
+    }
+  }, []);
+
   useEffect(() => {
     async function fetchJadwal() {
       if (!idKota) return;
@@ -195,23 +204,46 @@ export default function JadwalSholat() {
             ))}
           </div>
         </div>
-        {/* Countdown Ramadhan */}
-        <div className="bg-zinc-800 p-4 mt-6 rounded-lg shadow-lg w-[370px] text-center">
-          <h2 className="text-lg font-semibold">🕌 Countdown Ramadhan-1446 H</h2>
-          <p className="text-2xl font-bold mt-2">
-            {(() => {
-              const today = new Date();
-              const ramadhanDate = new Date(2025, 2, 1);
-              // Hitung selisih dalam UTC untuk menghindari masalah zona waktu
-              const diffTime = Math.ceil((ramadhanDate.setUTCHours(0, 0, 0, 0) - today.setUTCHours(0, 0, 0, 0)) / (1000 * 60 * 60 * 24));
-              return Math.max(0, diffTime);
-            })()} Hari Lagi
-          </p>
-          <p className="text-sm mt-2 text-gray-400">Ramadhan dimulai pada 1 Maret</p>
-        </div>
+{/* Hitungan Hari Ramadhan */}
+<div className="bg-zinc-800 p-4 mt-6 rounded-lg shadow-lg w-[370px] text-center">
+  <h2 className="text-lg font-semibold">🕌 Ramadhan 1446 H</h2>
+  <p className="text-2xl font-bold mt-2">
+    {(() => {
+      const today = new Date();
+      const ramadhanStart = new Date(2025, 2, 1); // 1 Maret 2025
+      today.setHours(0, 0, 0, 0);
+      ramadhanStart.setHours(0, 0, 0, 0);
+      
+      // Hitung selisih hari
+      const diffTime = Math.floor((today - ramadhanStart) / (1000 * 60 * 60 * 24)) + 1;
+      
+      return diffTime > 30 ? "Ramadhan telah berakhir" : `Hari ke-${diffTime}`;
+    })()}
+  </p>
+  <p className="text-sm mt-2 text-gray-400">Ramadhan dimulai pada 1 Maret 2025</p>
+</div>
+
+
         <Headline/>
         <br /><br /><br />
       </div>
+
+      {/* popup ekstensi */}
+      {showPopupEks && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80">
+          <div className="bg-white text-black p-6 rounded-lg shadow-lg max-w-sm text-center">
+            <p className="mb-4">Untuk pengalaman terbaik, buka dengan ekstensi ini!</p>
+            <a
+              href="https://chromewebstore.google.com/detail/ckejmhbmlajgoklhgbapkiccekfoccmk?utm_source=item-share-cp"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+            >
+              Pasang Ekstensi
+            </a>
+          </div>
+        </div>
+      )}
       
       {/* popup baca quran */}
       {/* {showPopupAl && (

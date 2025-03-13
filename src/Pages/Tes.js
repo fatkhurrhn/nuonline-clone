@@ -3,18 +3,15 @@ import Navbar from "../components/Navbar";
 import FooterComponent from "../components/FooterUtama";
 
 function Sample() {
-  const [showPopup, setShowPopup] = useState(false);
+  const [showPopupEks, setShowPopupEks] = useState(false);
 
   useEffect(() => {
     const isDesktop = window.innerWidth > 768; // Deteksi desktop
     if (isDesktop) {
-      setShowPopup(true);
+      setShowPopupEks(true);
     }
   }, []);
 
-  const handleClose = () => {
-    setShowPopup(false);
-  };
 
   return (
     <div className="relative bg-zinc-900 text-zinc-400 min-h-screen">
@@ -25,7 +22,7 @@ function Sample() {
         </div>
       </div>
       <FooterComponent />
-      {showPopup && (
+      {showPopupEks && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white text-black p-6 rounded-lg shadow-lg max-w-sm text-center">
             <p className="mb-4">Untuk pengalaman terbaik, buka dengan ekstensi ini!</p>
@@ -37,12 +34,6 @@ function Sample() {
             >
               Pasang Ekstensi
             </a>
-            <button
-              className="block mt-4 text-gray-600 hover:text-gray-800"
-              onClick={handleClose}
-            >
-              Tutup
-            </button>
           </div>
         </div>
       )}
